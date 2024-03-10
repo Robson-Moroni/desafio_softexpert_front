@@ -4,6 +4,10 @@
     <div class="container">
       <h1>Divisão de Conta</h1>
       <div class="form-group">
+        <label for="total">Usuário de destino do pagamento (PicPay)</label>
+        <input type="text" id="pagamento" v-model="conta.detinoPagamento" required>
+      </div>
+      <div class="form-group">
         <label for="total">Total da conta:</label>
         <input type="number" id="total" v-model="conta.total" required>
       </div>
@@ -76,6 +80,7 @@ export default {
  data() {
    return {
      conta: {
+       detinoPagamento: '',
        total: 0,
        outrosValores: [
         {
@@ -130,8 +135,6 @@ export default {
   } 
 }
 </script>
-
-
 
 
 <style scoped>
