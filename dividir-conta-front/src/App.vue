@@ -9,16 +9,18 @@
       </div>
       <div class="form-group">
         <label for="discount">Desconto:</label>
-        <input type="number" id="discount" v-model="conta.desconto.valor" placeholder="Valor em reais" step="0.01">
-        <select id="discount-type" v-model="conta.desconto.tipo">
+        <input type="number" id="discount" v-model="conta.outrosValores[0].valor" placeholder="Valor em reais" step="0.01">
+        <input type="text" id="discount-description" v-model="conta.outrosValores[0].descricao" value="DESCONTO">
+        <select id="discount-type" v-model="conta.outrosValores[0].tipo">
           <option value="PORCENTAGEM">Porcentagem</option>
           <option value="VALOR">Valor</option>
         </select>
       </div>
       <div class="form-group">
         <label for="addition">Acrescimo:</label>
-        <input type="number" id="addition" v-model="conta.acrescimo.valor" placeholder="Valor em reais" step="0.01">
-        <select id="addition-type" v-model="conta.acrescimo.tipo">
+        <input type="number" id="addition" v-model="conta.outrosValores[1].valor" placeholder="Valor em reais" step="0.01">
+        <input type="text" id="addition-description" v-model="conta.outrosValores[1].descricao" value="ACRESCIMO">
+        <select id="addition-type" v-model="conta.outrosValores[1].tipo">
           <option value="PORCENTAGEM">Porcentagem</option>
           <option value="VALOR">Valor</option>
         </select>
@@ -75,14 +77,18 @@ export default {
    return {
      conta: {
        total: 0,
-       desconto: {
-         tipo: 'PORCENTAGEM',
-         valor: 0
-       },
-       acrescimo: {
-         tipo: 'PORCENTAGEM',
-         valor: 0
-       },
+       outrosValores: [
+        {
+          tipo: 'PORCENTAGEM',
+          valor: 0,
+          descricao: 'DESCONTO'
+        }, 
+        {
+          tipo: 'PORCENTAGEM',
+          valor: 0,
+          descricao: 'ACRESCIMO'
+        }
+       ],
        pedidos: [{
          total: 0,
          pessoa: '',
@@ -117,7 +123,7 @@ export default {
    },
    async submitForm() {
      try {
-       const response = await axios.get('http://localhost:8080/api/divisao-conta/dividir');
+       const response = await axios.post('http://localhost:8080/api/divisao-conta/dividir', this.conta);
        console.log(response.data)
       } catch (error) { console.error(error); } 
     } 
