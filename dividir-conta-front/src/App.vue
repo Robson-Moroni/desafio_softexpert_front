@@ -5,7 +5,7 @@
       <h1>Divisão de Conta</h1>
       <div class="form-group">
         <label for="total">Usuário de destino do pagamento (PicPay)</label>
-        <input type="text" id="pagamento" v-model="conta.detinoPagamento" required>
+        <input type="text" id="pagamento" v-model="conta.destinoPagamento" required>
       </div>
       <div class="form-group">
         <label for="total">Total da conta:</label>
@@ -80,7 +80,7 @@ export default {
  data() {
    return {
      conta: {
-       detinoPagamento: '',
+       destinoPagamento: '',
        total: 0,
        outrosValores: [
         {
